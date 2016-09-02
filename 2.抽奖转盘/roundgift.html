@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+       div{
+           margin: 0;
+           padding: 0;
+           list-style: none;
+       }
+
+        .round{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(circle,lightblue,lightgreen,lightgoldenrodyellow);
+            border: 2px solid yellow;
+           position: relative;
+        }
+        .line{
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background-color: yellow;
+            display: block;
+            top: 98px;
+            transform-origin: 100%;
+        }
+        .text{
+            position: absolute;
+            width: 20px;
+            height: 100px;
+            line-height: 20px;
+            left: 90px;
+            transform-origin: 50% 100%;
+        }
+        .l1{
+            transform: rotate(45deg);
+        }
+        .l2{
+            transform: rotate(90deg);
+        }
+        .l3{
+            transform: rotate(135deg);
+        }
+        .l4{
+            transform: rotate(180deg);
+        }
+        .l5{
+            transform: rotate(225deg);
+        }
+        .l6{
+            transform: rotate(270deg);
+        }
+        .l7{
+            transform: rotate(315deg);
+        }
+        .l8{
+            transform: rotate(360deg);
+        }
+
+        .t1{
+            transform: rotate(22.5deg);
+        }
+        .t2{
+            transform: rotate(67.5deg);
+        }
+        .t3{
+            transform: rotate(112.5deg);
+        }
+        .t4{
+            transform: rotate(157.5deg);
+        }
+        .t5{
+            transform: rotate(202.5deg);
+        }
+        .t6{
+            transform: rotate(247.5deg);
+        }
+        .t7{
+            transform: rotate(292.5deg);
+        }
+        .t8{
+            transform: rotate(337.5deg);
+        }
+
+       .div8 {
+           animation: round1 5s 1 both;
+
+       }
+
+       .div7 {
+           animation: round2 5s 1 both;
+
+       }
+
+       .div6 {
+           animation: round3 5s 1 both;
+
+       }
+
+       .div5 {
+           animation: round4 5s 1 both;
+
+       }
+
+       .div4 {
+           animation: round5 5s 1 both;
+
+       }
+
+       .div3 {
+           animation: round6 5s 1 both;
+       }
+
+       .div2 {
+           animation: round7 5s 1 both;
+
+       }
+
+       .div1 {
+           animation: round8 5s 1 both;
+       }
+
+       @keyframes round1 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3622.5deg);
+           }
+       }
+
+       @keyframes round2 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3667.5deg);
+           }
+       }
+
+       @keyframes round3 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3712.5deg);
+           }
+       }
+
+       @keyframes round4 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3757.5deg);
+           }
+       }
+
+       @keyframes round5 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3802.5deg);
+           }
+       }
+
+       @keyframes round6 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3847.5deg);
+           }
+       }
+       @keyframes round7 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3892.5deg);
+           }
+       }
+
+       @keyframes round8 {
+           0% {
+               transform: rotate(0deg);
+           }
+           100% {
+               transform: rotate(3937.5deg);
+           }
+       }
+
+        .pointer{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 100px;
+            top: 100px;
+            z-index: 10;
+        }
+
+        .base{
+            position: absolute;
+            width: 20px;
+            height: 20px; 
+            background-color: yellow;
+            border-radius: 50%;
+            z-index: 11;
+        }
+        .arrow{
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 40px solid transparent;
+            border-bottom: 40px solid yellow;
+            top: -70px;
+        }
+    </style>
+</head>
+<body>
+<div class="round" id="round">
+
+</div>
+<div class="pointer">
+    <div class="base"></div>
+    <div class="arrow"></div>
+</div>
+<input type="text" id="num"/><button id="submit">确定</button>
+<div>输入数字1-8，点击确定来调整获得的奖项</div>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script>
+    var num=1;
+    var arr=['一等奖','二等奖','三等奖','四等奖','五等奖','六等奖','七等奖','谢谢惠顾',]
+    function createLine(id,num){
+        for(var i=1;i<=num;i++){
+            (function(j){
+                $(document.createElement('i')).addClass('line').addClass('l'+j).appendTo($('#'+id))
+            })(i)
+
+        }
+    }
+
+    function createSpan(id,num,arr){
+        for(var i=1;i<=num;i++){
+            (function(j){
+                $(document.createElement('span')).addClass('text').addClass('t'+j).html(arr[i-1]).appendTo($('#'+id))
+            })(i)
+
+        }
+    }
+    function getgift(id, num) {
+
+            $('#'+id).attr('class','')
+            $("#"+id).addClass('round')
+            $('#' + id).addClass('div' + num)
+        
+    }
+
+    $('#submit').on('click',function(){
+       num= $('#num').val()
+        console.log(num)
+        getgift('round', num);
+    })
+
+    createLine('round',8)
+    createSpan('round',8,arr)
+</script>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        .box {
+            border: 5px solid #fff;
+            width: 600px;
+            height: 300px;
+            background: #8d8d89;
+            position: relative;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .roundT {
+            position: absolute;
+            width: 300px;
+            height: 150px;
+            border-radius: 150px 150px 5px 5px;
+            background: red;
+            top: 50px;
+            left: 150px;
+            background: -webkit-linear-gradient(left, #52ee79, #16a8e6 30%, #D139FF 80%, red 100%);
+            background: linear-gradient(left, #52ee79, #16a8e6 30%, #D139FF 80%, red 100%);
+        }
+
+        .roundB {
+            position: absolute;
+            top: 56px;
+            left: 156px;
+            width: 288px;
+            height: 144px;
+            background: #8d8d89;
+            border-radius: 144px 144px 0 0;
+        }
+
+        .dot {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .dot1 {
+            background: #52ee79;
+            top: 140px;
+            left: 15px;
+        }
+
+        .dot2 {
+            background: #07b5e6;
+            top: 48px;
+            left: 50px;
+        }
+
+        .dot3 {
+            background: #16a8e6;
+            top: 10px;
+            left: 144px;
+        }
+
+        .dot4 {
+            background: #D139FF;
+            top: 48px;
+            left: 237px;
+        }
+
+        .dot5 {
+            background: red;
+            top: 140px;
+            left: 273px;
+        }
+
+        img {
+            position: absolute;
+            transform: rotate(0deg);
+            left: 10px;
+            top: 130px;
+            transition: all .5s
+        }
+
+        h3 {
+            position: absolute;
+            font-size: 50px;
+            font-weight: 900;
+            color: #fff;
+            top: 210px;
+            left: 236px;
+            z-index: 2
+        }
+
+        #add, #lost, #level {
+            font-size: 30px;
+            font-weight: 900;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="roundT"></div>
+    <div class="roundB">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
+        <div class="dot dot3"></div>
+        <div class="dot dot4"></div>
+        <div class="dot dot5"></div>
+        <img src="2.png" alt="" id="rotate">
+    </div>
+    <h3 id="percent">0%</h3>
+
+    <div id="add" style="right: 0;bottom: 0;position: absolute;cursor: pointer">增仓</div>
+    <div id="lost" style="left: 0;bottom: 0;position: absolute;cursor: pointer">资金流入</div>
+    <div id="level" style="right: 0;top: 0;position: absolute;">趋势级别：低</div>
+</div>
+<br>
+可以输入数字：<input id="num" type="text">
+</body>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script>
+    var data = parseFloat(document.getElementById("data").innerHTML);
+    var deg = 180 * data / 100 + "deg";
+    $("#pointer").css({"transform": "rotate(" + deg + ")"});
+</script>
+<script>
+    var circle = {
+        num: 0,
+        init: function () {
+            var _this = this;
+            document.querySelector("#num").onkeyup = function () {
+                _this.num = Number(this.value);
+                _this.change();
+            };
+            document.querySelector("#lost").onclick = function () {
+                _this.num -= 1;
+                _this.change();
+            };
+            document.querySelector("#add").onclick = function () {
+                _this.num += 1;
+                _this.change();
+            }
+        },
+        change: function () {
+            if (this.num > 100 || this.num < 0) {
+                alert("数字不得大于100或小于0");
+                this.num = 0;
+            }
+            deg = this.num * 1.8;
+            document.querySelector("#rotate").style.transform = "rotate(" + deg + "deg)";
+            document.querySelector("#percent").innerHTML = this.num + "%";
+            document.querySelector("#level").innerHTML = this.num > 70 ? "趋势级别：高" : this.num < 30 ? "趋势级别：低" : "趋势级别：中";
+        }
+    };
+    circle.init();
+</script>
+</html>
+
